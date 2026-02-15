@@ -1,10 +1,13 @@
 -- [[ 1. Basic Settings ]]
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.expandtab = true          -- Use spaces instead of tabs
+vim.opt.tabstop = 2               -- Number of spaces that a <Tab> counts for
+vim.opt.softtabstop = 2           -- Number of spaces that a <Tab> counts for while editing
+vim.opt.shiftwidth = 2            -- Number of spaces to use for each step of (auto)indent
+vim.opt.number = true             -- Print the line number in front of each line
+vim.opt.relativenumber = true     -- Show relative line numbers for easier jumping
+vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard (Copy/Paste with Mac)
+vim.opt.smartindent = true        -- Insert indents automatically when starting a new line
+vim.opt.termguicolors = true      -- Enable 24-bit RGB colors in the TUI (Better for Catppuccin)
 
 -- [[ 2. Bootstrap lazy.nvim ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -17,33 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 -- [[ 4. Plugin Management ]]
-require("lazy").setup({
-  spec = {
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-    {
-      "nvim-treesitter/nvim-treesitter",
-      build = ":TSUpdate",
-      config = function()
-        -- Usamos pcall para evitar que el error bloquee el editor si el módulo no está listo
-        local status, configs = pcall(require, "nvim-treesitter.configs")
-        if not status then return end
-        configs.setup({
-          ensure_installed = { "lua", "vim", "vimdoc", "javascript", "html", "css" },
-          highlight = { enable = true },
-        })
-      end
-    },
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
-      config = function()
-        vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>')
-      end
-    },
-  }
-})
+require("lazy").setup("plugins")
 
 -- [[ 5. Final Theme & Keymaps ]]
 vim.cmd.colorscheme "catppuccin-mocha"
