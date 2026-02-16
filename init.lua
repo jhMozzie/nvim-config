@@ -31,3 +31,9 @@ end, { desc = "Toggle inline diagnostics" })
 -- [[ 4. Plugin Management ]]
 require("vim-options")
 require("lazy").setup("plugins")
+
+-- [[ 5. Buffer Navigation ]]
+-- Alan's preferred navigation: Use Tab to switch between open files
+-- This mimics a modern IDE behavior for a seamless workflow
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })

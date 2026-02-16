@@ -8,7 +8,7 @@ return {
 		keymap = { preset = "default" },
 
 		-- Configuración para que reconozca los fragmentos de código
-		snippets = { preset = "luasnip" },
+		snippets = { preset = "default" },
 
 		sources = {
 			-- LSP para Java/Angular, Path para rutas de Tailwind, Buffer para SQL
